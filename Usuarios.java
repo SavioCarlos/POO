@@ -10,8 +10,6 @@ public class Usuarios {
     private String senha;
     public int escolha;
 
-   
-
     public void criarUsuario(String nomeUsuario) {
         this.nomeUsuario = nomeUsuario;
 
@@ -34,20 +32,22 @@ public class Usuarios {
             System.out.println("Erro ao criar o arquivo.");
         }
     }
-     public void Gerencia(){
-     Scanner scanner = new Scanner(System.in);
+
+    public void Gerencia() {
+        Scanner scanner = new Scanner(System.in);
         System.out.print("Digite o nome de usuário: ");
         nomeUsuario = scanner.nextLine();
         this.nomeUsuario = nomeUsuario;
         File arquivo = new File(nomeUsuario + ".txt");
-       if (arquivo.exists()) {
+
+        if (arquivo.exists()) {
             System.out.println("Esse usuário existe!");
-            autenticarUsuario(arquivo);     
-            
+            autenticarUsuario(arquivo);
+
         } else {
             criarUsuario(nomeUsuario);
         }
-     }  
+    }
 
     public void autenticarUsuario(File arquivo) {
 
@@ -78,11 +78,11 @@ public class Usuarios {
             System.out.println("Usuário não encontrado.");
         }
     }
-    
+
     public void EscolhasOpc() {
         GerenciadorTarefas gerenciador = new GerenciadorTarefas();
+        gerenciador.carregarTarefasDoArquivo(nomeUsuario);
         Scanner scanner = new Scanner(System.in);
-         gerenciador.carregarTarefasDoArquivo(nomeUsuario);
         while (true) {
             System.out.println("\n===== MENU =====");
             System.out.println("1. Criar nova tarefa");
@@ -99,10 +99,10 @@ public class Usuarios {
 
             switch (opcao) {
                 case 1:
-                     // Solicita que o usuário informe o título e a descrição da tarefa
-                     System.out.print("Digite o título da tarefa: ");
-                     scanner.nextLine();
-                     String titulo = scanner.nextLine();
+                    // Solicita que o usuário informe o título e a descrição da tarefa
+                    System.out.print("Digite o título da tarefa: ");
+                    scanner.nextLine();
+                    String titulo = scanner.nextLine();
 
                     System.out.print("Digite a descrição da tarefa: ");
                     String descricao = scanner.nextLine();
@@ -121,13 +121,14 @@ public class Usuarios {
                     if (opcaoSubtarefa.equalsIgnoreCase("s")) {
                         System.out.print("Digite o título da tarefa pai: ");
                         String tituloTarefaPai = scanner.nextLine();
-                         Tarefa tarefaPai = gerenciador.buscarTarefaPorTitulo(tituloTarefaPai);
+                        Tarefa tarefaPai = gerenciador.buscarTarefaPorTitulo(tituloTarefaPai);
 
-                         if (tarefaPai != null) {
-                           tarefaPai.adicionarSubtarefa(novaTarefa);
-                           System.out.println("Tarefa adicionada como subtarefa com sucesso!");
-                         } else {
-                             System.out.println("Tarefa pai não encontrada. A tarefa será adicionada como tarefa independente.");
+                        if (tarefaPai != null) {
+                            tarefaPai.adicionarSubtarefa(novaTarefa);
+                            System.out.println("Tarefa adicionada como subtarefa com sucesso!");
+                        } else {
+                            System.out.println(
+                                    "Tarefa pai não encontrada. A tarefa será adicionada como tarefa independente.");
                         }
                     } else {
                         gerenciador.adicionarTarefa(novaTarefa, null);
@@ -136,7 +137,6 @@ public class Usuarios {
                     System.out.println("\nTarefa criada com sucesso!");
                     break;
 
-                
                 case 2:
                     System.out.println("\n===== TAREFAS PENDENTES =====");
                     gerenciador.exibirTarefasPendentes();
@@ -145,10 +145,10 @@ public class Usuarios {
                     System.out.print("\nDigite o número da tarefa que deseja concluir: ");
                     int indiceTarefa = scanner.nextInt();
 
-                    if (gerenciador.concluirTarefa ( indiceTarefa, nomeUsuario)) {
+                    if (gerenciador.concluirTarefa(indiceTarefa, nomeUsuario)) {
 
                         System.out.println("Tarefa concluída com sucesso!");
-                        gerenciador.adicionarTarefaArquivo();
+                        gerenciador.adicionarTarefaArquivo(nomeUsuario);
                     } else {
                         System.out.println("Não foi possível concluir a tarefa.");
                     }
