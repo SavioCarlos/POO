@@ -20,7 +20,6 @@ public class GerenciadorTarefas {
         this.tarefasConcluidas = new ArrayList<>();
         this.scanner = new Scanner(System.in);
     }
-     
 
     public List<Tarefa> getTarefasPendentes() {
         return tarefasPendentes;
@@ -38,7 +37,7 @@ public class GerenciadorTarefas {
         }
     }
 
-    public boolean concluirTarefa(int indice,String nomeUsuario) {
+    public boolean concluirTarefa(int indice, String nomeUsuario) {
         if (indice < 1 || indice > tarefasPendentes.size()) {
             return false;
         }
@@ -60,9 +59,7 @@ public class GerenciadorTarefas {
         return true;
     }
 
-    public void adicionarTarefaArquivo() {
-        System.out.println("Digite em qual usuário você quer salvar a tarefa:");
-        String nomeUsuario = scanner.nextLine();
+    public void adicionarTarefaArquivo(String nomeUsuario) {
 
         try {
             File arquivo = new File(nomeUsuario + ".txt");
@@ -81,39 +78,39 @@ public class GerenciadorTarefas {
             System.out.println("Erro ao escrever no arquivo: " + e.getMessage());
         }
     }
-public void carregarTarefasDoArquivo(String nomeUsuario) {
-    try {
-        File arquivo = new File(nomeUsuario + ".txt");
-        BufferedReader leitor = new BufferedReader(new FileReader(arquivo));
 
-        String linha;
-        int contadorLinhas = 0;
-        while ((linha = leitor.readLine()) != null) {
-            contadorLinhas++;
-            if (contadorLinhas > 2 && linha.startsWith(". ")) {
-                String[] partes = linha.substring(2).split(" - ");
-                if (partes.length == 2) {
-                    String titulo = partes[0];
-                    String descricao = partes[1];
-                    Tarefa tarefa = new Tarefa(titulo, descricao, LocalDate.now(), "");
+    public void carregarTarefasDoArquivo(String nomeUsuario) {
+        try {
+            File arquivo = new File(nomeUsuario + ".txt");
+            BufferedReader leitor = new BufferedReader(new FileReader(arquivo));
 
-                    tarefa.setConcluida(true);
-                    tarefa.setDataConclusao(LocalDate.now());
+            String linha;
+            int contadorLinhas = 0;
+            while ((linha = leitor.readLine()) != null) {
+                contadorLinhas++;
+                if (contadorLinhas > 2 && linha.startsWith(". ")) {
+                    String[] partes = linha.substring(2).split(" - ");
+                    if (partes.length == 2) {
+                        String titulo = partes[0];
+                        String descricao = partes[1];
+                        Tarefa tarefa = new Tarefa(titulo, descricao, LocalDate.now(), "");
 
-                    tarefasConcluidas.add(tarefa);
+                        tarefa.setConcluida(true);
+                        tarefa.setDataConclusao(LocalDate.now());
+
+                        tarefasConcluidas.add(tarefa);
+                    }
                 }
             }
+
+            leitor.close();
+            System.out.println("Tarefas carregadas do arquivo.");
+        } catch (IOException e) {
+            System.out.println("Erro ao ler o arquivo: " + e.getMessage());
         }
-
-        leitor.close();
-        System.out.println("Tarefas carregadas do arquivo.");
-    } catch (IOException e) {
-        System.out.println("Erro ao ler o arquivo: " + e.getMessage());
     }
-}
 
-
-    public void exibirTarefasPendentes() {     
+    public void exibirTarefasPendentes() {
         if (tarefasPendentes.isEmpty()) {
             System.out.println("Não há tarefas pendentes.");
         } else {
@@ -125,7 +122,7 @@ public void carregarTarefasDoArquivo(String nomeUsuario) {
     }
 
     public void exibirTarefasConcluidas() {
-       
+
         if (tarefasConcluidas.isEmpty()) {
             System.out.println("Não há tarefas concluídas.");
         } else {
