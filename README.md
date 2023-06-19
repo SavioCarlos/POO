@@ -1,1 +1,1 @@
-Esse projeto é um gerenciador de tarefas que recebe uma tarefa com um Titulo, descricao, data de criacao, Data de Conclusao e informa se a tarefa esta concluida ou nao.
+Esse projeto é um gerenciador de tarefas que recebe uma tarefa com um Titulo, descricao, data de criacao, Data de Conclusao, categoria e se é uma subtarefa de outra tarefa, além de informar se a tarefa ou subtarefa está concluída ou não.
