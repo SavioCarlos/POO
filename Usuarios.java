@@ -13,7 +13,7 @@ public class Usuarios {
     public void criarUsuario(String nomeUsuario) {
         this.nomeUsuario = nomeUsuario;
 
-        // Verifica se o arquivo já existe
+        
         File arquivo = new File(nomeUsuario + ".txt");
 
         Scanner scanner = new Scanner(System.in);
