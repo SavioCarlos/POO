@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-       Usuarios usuario = new Usuarios();
-       usuario.Gerencia();
-   }
+        Usuarios usuario = new Usuarios();
+        usuario.Gerencia();
+    }
 }
