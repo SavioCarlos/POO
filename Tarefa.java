@@ -69,7 +69,7 @@ public class Tarefa {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
-    
+
     public List<Tarefa> getSubtarefas() {
         return subtarefas;
     }
@@ -77,11 +77,10 @@ public class Tarefa {
     public void setSubtarefas(List<Tarefa> subtarefas) {
         this.subtarefas = subtarefas;
     }
-    
-    //metodo para adicionar subtarefas 
+
+    // metodo para adicionar subtarefas
     public void adicionarSubtarefa(Tarefa subtarefa) {
-      subtarefas.add(subtarefa);
+        subtarefas.add(subtarefa);
     }
 
-    
 }
